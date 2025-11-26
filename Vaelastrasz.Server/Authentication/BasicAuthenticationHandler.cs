@@ -25,7 +25,7 @@ namespace Vaelastrasz.Server.Authentication
             ConnectionString connectionString) : base(options, logger, encoder)
         {
             _connectionString = connectionString;
-            _admins = configuration.GetSection("Admins").Get<List<Admin>>()!;
+            _admins = configuration.GetSection("Admins").Get<List<Admin>>() ?? [];
         }
 
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()

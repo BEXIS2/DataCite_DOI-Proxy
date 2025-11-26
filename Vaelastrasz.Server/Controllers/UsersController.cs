@@ -20,7 +20,7 @@ namespace Vaelastrasz.Server.Controllers
         public UsersController(ILogger<UsersController> logger, IConfiguration configuration, ConnectionString connectionString)
         {
             _connectionString = connectionString;
-            _admins = configuration.GetSection("Admins").Get<List<Admin>>()!;
+            _admins = configuration.GetSection("Admins").Get<List<Admin>>() ?? [];   
             _logger = logger;
         }
 
