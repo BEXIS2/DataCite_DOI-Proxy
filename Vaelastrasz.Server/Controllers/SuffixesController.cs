@@ -36,6 +36,9 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="BadRequestException">Wird ausgelöst, wenn das generierte Suffix ungültig ist.</exception>
         [HttpPost("suffixes")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> PostAsync(CreateSuffixModel model)
         {
             if (!User.IsInRole("user") || User.Identity?.Name == null)
@@ -56,7 +59,8 @@ namespace Vaelastrasz.Server.Controllers
             if (SuffixHelper.Validate(suffix, user.Pattern, new Dictionary<string, string>((await placeholderService.FindByUserIdAsync(user.Id)).Select(p => new KeyValuePair<string, string>(p.Expression, p.RegularExpression)))))
                 return Ok(suffix);
 
-            throw new BadRequestException($"The value of suffix ({suffix}) is invalid.");
+            //throw new BadRequestException($"The value of suffix ({suffix}) is invalid.");
+            return BadRequest($"The value of suffix ({suffix}) is invalid.");
         }
     }
 }

@@ -40,6 +40,8 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="UnauthorizedException">Wird ausgelöst, wenn der Benutzer nicht berechtigt ist, den Platzhalter zu löschen.</exception>
         [HttpDelete("placeholders/{id}")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> DeleteByIdAsync(long id)
         {
             using var placeholderService = new PlaceholderService(_connectionString);
@@ -69,6 +71,8 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="InvalidOperationException">Wird ausgelöst, wenn ein unerwarteter Fehler beim Zugriff auf Benutzerdaten auftritt.</exception>
         [HttpGet("placeholders")]
+        [ProducesResponseType(typeof(IEnumerable<ReadPlaceholderModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetAsync()
         {
             using var placeholderService = new PlaceholderService(_connectionString);
@@ -104,6 +108,8 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="UnauthorizedException">Wird ausgelöst, wenn der Zugriff ohne angemessene Authentifizierung erfolgt.</exception>
         [HttpGet("placeholders/{id}")]
+        [ProducesResponseType(typeof(ReadPlaceholderModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetByIdAsync(long id)
         {
             using var placeholderService = new PlaceholderService(_connectionString);
@@ -134,6 +140,7 @@ namespace Vaelastrasz.Server.Controllers
         /// <exception cref="UnauthorizedException">Wird ausgelöst, wenn der Zugriff ohne ordnungsgemäße Authentifizierung erfolgt.</exception>
         [HttpPost("placeholders")]
         [ProducesResponseType(typeof(ReadPlaceholderModel), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> PostAsync(CreatePlaceholderModel model)
         {
             if (User.IsInRole("admin") || (User.IsInRole("user") && long.TryParse(User.FindFirst("UserId")?.Value, out long userId) && model.UserId == userId))
@@ -170,6 +177,8 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="UnauthorizedException">Wird ausgelöst, wenn ein Benutzer ohne die erforderlichen Berechtigungen versucht, den Platzhalter zu aktualisieren.</exception>
         [HttpPut("placeholders/{id}")]
+        [ProducesResponseType(typeof(ReadPlaceholderModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> PutByIdAsync(long id, UpdatePlaceholderModel model)
         {
             using var placeholderService = new PlaceholderService(_connectionString);

@@ -40,6 +40,8 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="UnauthorizedException">Wird ausgelöst, wenn der Benutzer nicht die Berechtigung hat, den DOI zu löschen.</exception>
         [HttpDelete("dois/{prefix}/{suffix}")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> DeleteAsync(string prefix, string suffix)
         {
             if (!User.IsInRole("user") || User?.Identity?.Name == null)
@@ -77,6 +79,8 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="UnauthorizedAccessException">Wird ausgelöst, wenn die Benutzeridentität nicht verfügbar ist.</exception>
         [HttpGet("dois")]
+        [ProducesResponseType(typeof(ReadDOIModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetAsync()
         {
             if (!User.IsInRole("user") || User?.Identity?.Name == null)
@@ -110,6 +114,8 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="UnauthorizedException">Wird ausgelöst, wenn der Benutzer nicht die Berechtigung hat, auf den DOI-Eintrag zuzugreifen.</exception>
         [HttpGet("dois/{id}")]
+        [ProducesResponseType(typeof(ReadDOIModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetById(long id)
         {
             if (!User.IsInRole("user") || User?.Identity?.Name == null)
@@ -147,6 +153,8 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="UnauthorizedException">Wird ausgelöst, wenn der Benutzer nicht die Berechtigung hat, auf den DOI-Eintrag zuzugreifen.</exception>
         [HttpGet("dois/{prefix}/{suffix}")]
+        [ProducesResponseType(typeof(ReadDOIModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetByPrefixAndSuffix(string prefix, string suffix)
         {
             if (!User.IsInRole("user") || User?.Identity?.Name == null)
@@ -169,6 +177,7 @@ namespace Vaelastrasz.Server.Controllers
 
         [HttpPost("dois")]
         [ProducesResponseType(typeof(ReadDOIModel), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> Post(CreateDOIModel model)
         {
             if (!User.IsInRole("user") || User?.Identity?.Name == null)
@@ -198,6 +207,8 @@ namespace Vaelastrasz.Server.Controllers
         }
 
         [HttpPut("dois/{doi}")]
+        [ProducesResponseType(typeof(ReadDOIModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> PutByDOI(string doi, UpdateDOIModel model)
         {
             if (!User.IsInRole("user") || User?.Identity?.Name == null)
@@ -221,6 +232,8 @@ namespace Vaelastrasz.Server.Controllers
         }
 
         [HttpPut("dois/{prefix}/{suffix}")]
+        [ProducesResponseType(typeof(ReadDOIModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> PutByPrefixAndSuffix(string prefix, string suffix, UpdateDOIModel model)
         {
             if (!User.IsInRole("user") || User?.Identity?.Name == null)

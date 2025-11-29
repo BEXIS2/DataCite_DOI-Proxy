@@ -32,6 +32,7 @@ namespace Vaelastrasz.Server.Controllers
         /// Weitere Informationen finden Sie in der <see href="https://github.com/sventhiel/Vaelastrasz/tree/master/Vaelastrasz.Server#concepts">Dokumentation</see>.
         /// </remarks>
         [HttpGet("concepts")]
+        [ProducesResponseType(typeof(ConceptModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAsync()
         {
             string filePath = Path.Combine(_env.WebRootPath, "concepts", "datacite.json");

@@ -32,6 +32,8 @@ namespace Vaelastrasz.Server.Controllers
         /// um eine erfolgreiche Anfrage zu ermöglichen.
         /// </remarks>
         [HttpGet("prefixes")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetAsync()
         {
             if (!User.IsInRole("user") || User.Identity?.Name == null)

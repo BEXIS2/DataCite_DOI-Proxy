@@ -18,7 +18,7 @@ namespace Vaelastrasz.Server.Controllers
         public UsersController(ILogger<UsersController> logger, IConfiguration configuration, ConnectionString connectionString)
         {
             _connectionString = connectionString;
-            _admins = configuration.GetSection("Admins").Get<List<Admin>>() ?? [];   
+            _admins = configuration.GetSection("Admins").Get<List<Admin>>() ?? [];
             _logger = logger;
         }
 
@@ -37,6 +37,8 @@ namespace Vaelastrasz.Server.Controllers
         /// Entwickler sollten sicherstellen, dass die erforderlichen Administratorrechte gewährt sind, um die Löschoperation erfolgreich ausführen zu können.
         /// </remarks>
         [HttpDelete("users/{id}")]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> DeleteAsync(long id)
         {
             if (!User.IsInRole("admin"))
@@ -63,6 +65,8 @@ namespace Vaelastrasz.Server.Controllers
         /// Entwickler sollten sicherstellen, dass die erforderlichen Administratorrechte gewährt sind, um die Liste der Benutzer abzurufen.
         /// </remarks>
         [HttpGet("users")]
+        [ProducesResponseType(typeof(IEnumerable<ReadUserModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetAsync()
         {
             if (!User.IsInRole("admin"))
@@ -71,7 +75,7 @@ namespace Vaelastrasz.Server.Controllers
             using var userService = new UserService(_connectionString);
             var users = await userService.FindAsync();
 
-            return Ok(new List<ReadUserModel>(users.Select(u => ReadUserModel.Convert(u))));
+            return Ok(users.Select(u => ReadUserModel.Convert(u)));
         }
 
         /// <summary>
@@ -90,6 +94,8 @@ namespace Vaelastrasz.Server.Controllers
         /// Entwickler sollten sicherstellen, dass die Adminrechte korrekt zugewiesen sind, um Zugriff auf die Benutzerdetails zu gewähren.
         /// </remarks>
         [HttpGet("users/{id}")]
+        [ProducesResponseType(typeof(ReadUserModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetByIdAsync(long id)
         {
             if (!User.IsInRole("admin"))
@@ -121,6 +127,8 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         [HttpPost("users")]
         [ProducesResponseType(typeof(ReadUserModel), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> PostAsync(CreateUserModel model)
         {
             if (!User.IsInRole("admin"))
@@ -161,6 +169,9 @@ namespace Vaelastrasz.Server.Controllers
         /// und die Adminberechtigungen korrekt zugewiesen sind, um die Aktualisierung erfolgreich durchzuführen.
         /// </remarks>
         [HttpPut("users/{id}")]
+        [ProducesResponseType(typeof(ReadUserModel), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> PutByIdAsync(long id, UpdateUserModel model)
         {
             if (!User.IsInRole("admin"))

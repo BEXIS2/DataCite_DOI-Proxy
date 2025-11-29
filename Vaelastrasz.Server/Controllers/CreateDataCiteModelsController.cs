@@ -3,7 +3,6 @@ using MethodTimer;
 using Microsoft.AspNetCore.Mvc;
 using Vaelastrasz.Library.Extensions;
 using Vaelastrasz.Library.Models;
-using Vaelastrasz.Server.Configurations;
 
 namespace Vaelastrasz.Server.Controllers
 {

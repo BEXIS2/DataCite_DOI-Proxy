@@ -28,8 +28,4 @@
       "url": "https://google.de"
     }
   }
-} curl -X 'POST' \ 'http://localhost:5041/api/datacite' \ -H 'accept: */*' \ -H 'Authorization: Basic dGVzdDp0ZXN0' \ -H 'Content-Type: application/json' \ -d '{ "data": { "id": "string", "type": "dois", "attributes": { "doi": "10.23720/20230125004", "event": "hide", "creators": [ { "name": "Sven Thiel", "nameType": "Personal" } ], "titles": [ {
-  "title": "This is a automatic generated doi",
-  "lang": "German",
-  "titleType": 1
-} ], "publisher": "string", "publicationYear": 2023, "url": "https://google.de" } } }'
+} curl -X 'POST' \ 'http://localhost:5041/api/datacite' \ -H 'accept: */*' \ -H 'Authorization: Basic dGVzdDp0ZXN0' \ -H 'Content-Type: application/json' \ -d '{ "data": { "id": "string", "type": "dois", "attributes": { "doi": "10.23720/20230125004", "event": "hide", "creators": [ { "name": "Sven Thiel", "nameType": "Personal" } ], "titles": [ { "title": "This is a automatic generated doi", "lang": "German", "titleType": 1 } ], "publisher": "string", "publicationYear": 2023, "url": "https://google.de" } } }'

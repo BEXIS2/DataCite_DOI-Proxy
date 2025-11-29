@@ -43,6 +43,7 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="NotFoundException">Wird ausgelöst, wenn das Konto des aktuellen Benutzers nicht vorhanden ist.</exception>
         [HttpDelete("datacite/{doi}")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> DeleteByDOIAsync(string doi)
         {
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
@@ -86,6 +87,8 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="NotFoundException">Wird ausgelöst, wenn das Konto des aktuellen Benutzers nicht existiert.</exception>
         [HttpGet("datacite")]
+        [ProducesResponseType(typeof(List<ReadDataCiteModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetAsync()
         {
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
@@ -151,6 +154,8 @@ namespace Vaelastrasz.Server.Controllers
         /// <exception cref="NotFoundException">Wird ausgelöst, wenn das Konto des Benutzers nicht existiert.</exception>
         /// <exception cref="UnauthorizedException">Wird ausgelöst, wenn der Benutzer nicht berechtigt ist, den DOI-Datensatz zu sehen.</exception>
         [HttpGet("datacite/{prefix}/{suffix}")]
+        [ProducesResponseType(typeof(ReadDataCiteModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetByPrefixAndSuffixAsync(string prefix, string suffix)
         {
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
@@ -200,6 +205,8 @@ namespace Vaelastrasz.Server.Controllers
         /// <exception cref="UnauthorizedException">Wird ausgelöst, wenn der Benutzer nicht berechtigt ist, Informationen zum DOI abzurufen.</exception>
         [HttpGet("datacite/{prefix}/{suffix}/citations")]
         [SwaggerCustomHeader("X-Citation-Style", ["apa", "harvard-cite-them-right", "modern-language-association", "vancouver", "chicago-fullnote-bibliography", "ieee"])]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetCitationStyleByPrefixAndSuffixAsync(string prefix, string suffix)
         {
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
@@ -254,6 +261,8 @@ namespace Vaelastrasz.Server.Controllers
         /// <exception cref="UnauthorizedException">Wird ausgelöst, wenn der Benutzer nicht berechtigt ist, Metadaten für den DOI abzurufen.</exception>
         [HttpGet("datacite/{prefix}/{suffix}/metadata")]
         [SwaggerCustomHeader("X-Metadata-Format", ["application/x-research-info-systems", "application/x-bibtex", "application/vnd.jats+xml", "application/vnd.codemeta.ld+json", "application/vnd.citationstyles.csl+json", "application/vnd.schemaorg.ld+json", "application/vnd.datacite.datacite+json", "application/vnd.datacite.datacite+xml"])]
+        [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetMetadataFormatByPrefixAndSuffixAsync(string prefix, string suffix)
         {
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
@@ -307,6 +316,7 @@ namespace Vaelastrasz.Server.Controllers
         /// <exception cref="ForbiddenException">Wird ausgelöst, wenn der DOI ungültig ist oder nicht verwaltet werden kann.</exception>
         [HttpPost("datacite")]
         [ProducesResponseType(typeof(ReadDataCiteModel), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> PostAsync(CreateDataCiteModel model)
         {
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
@@ -366,6 +376,8 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="NotFoundException">Wird ausgelöst, wenn das Konto des Benutzers nicht existiert.</exception>
         [HttpPut("datacite/{doi}")]
+        [ProducesResponseType(typeof(ReadDataCiteModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> PutByDOIAsync(string doi, UpdateDataCiteModel model)
         {
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)

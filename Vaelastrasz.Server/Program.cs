@@ -20,7 +20,22 @@ var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
 .Build();
 
-var openApiInfoConfiguration = configuration.GetSection("OpenApiInfo").Get<OpenApiInfoConfiguration>() ?? new OpenApiInfoConfiguration();
+var openApiInfoConfiguration = configuration.GetSection("OpenApiInfo").Get<OpenApiInfoConfiguration>() ?? new OpenApiInfoConfiguration
+{
+    Title = "DataCite DOI-Proxy",
+    Description = "A proxy service, not only, but specifically for BEXIS2 instances to communicate with DataCite.",
+    Contact = new OpenApiContactConfiguration
+    {
+        Name = "Sven Thiel",
+        Email = "m6thsv2@googlemail.com",
+        Url = "https://github.com/sventhiel/Vaelastrasz"
+    },
+    License = new OpenApiLicenseConfiguration
+    {
+        Name = "GPL-3.0 license",
+        Url = "https://www.gnu.org/licenses/gpl-3.0.html#license-text"
+    }
+};
 
 var logger = new LoggerConfiguration()
   .ReadFrom.Configuration(configuration)
@@ -135,6 +150,15 @@ builder.Services.AddOpenApi(options =>
     });
 });
 
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedHost;
+
+    // Falls Proxy private IP hat:
+    options.KnownIPNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
@@ -157,6 +181,8 @@ app.MapScalarApiReference("/", options =>
     options.HideModels = false;
     options.Layout = ScalarLayout.Classic;
     options.ShowSidebar = true;
+    if (Uri.TryCreate(builder.Configuration["Scalar:Server"], UriKind.Absolute, out var uri))
+        options.AddServer(new ScalarServer(uri.AbsoluteUri));
 }).AllowAnonymous();
 
 app.UseAuthentication();
@@ -164,9 +190,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseForwardedHeaders(new ForwardedHeadersOptions
-{
-    ForwardedHeaders = ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedHost
-});
+app.UseForwardedHeaders();
 
 app.Run();

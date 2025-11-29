@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vaelastrasz.Library.Exceptions;
 using Vaelastrasz.Library.Extensions;
+using Vaelastrasz.Library.Models;
 
 namespace Vaelastrasz.Server.Controllers
 {
@@ -34,6 +35,9 @@ namespace Vaelastrasz.Server.Controllers
         /// Die erfolgreiche Ausführung erfordert ausreichende Berechtigungen für den Zugriff auf das Dateisystem.
         /// </remarks>
         [HttpDelete("databases")]
+        [ProducesResponseType(typeof(ConceptModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public IActionResult DeleteAsync()
         {
             if (!User.IsInRole("admin"))
@@ -43,7 +47,10 @@ namespace Vaelastrasz.Server.Controllers
 
             database.Delete();
 
-            return Ok();
+            if (database.Exists)
+                return NotFound();
+
+            return Ok(true);
         }
 
         /// <summary>
@@ -59,6 +66,9 @@ namespace Vaelastrasz.Server.Controllers
         /// Es ist wichtig, dass die Zugriffsberechtigungen korrekt gesetzt sind, um sicherzustellen, dass der Dateidownload funktioniert.
         /// </remarks>
         [HttpGet("databases")]
+        [ProducesResponseType(typeof(ConceptModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public IActionResult GetAsync()
         {
             if (!User.IsInRole("admin"))
@@ -66,6 +76,9 @@ namespace Vaelastrasz.Server.Controllers
 
             // database
             FileInfo database = new FileInfo(_connectionString.Filename);
+
+            if (database == null || !database.Exists)
+                return NotFound();
 
             return File(System.IO.File.OpenRead(database.FullName), "application/octet-stream", $"{database.GetFileNameWithoutExtension()}_{DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss")}{database.GetExtension()}");
         }
@@ -85,29 +98,36 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="BadRequestException">Wird ausgelöst, wenn die hochgeladene Datei nicht den Anforderungen entspricht oder ungültig ist.</exception>
         [HttpPost("databases")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> PostAsync(IFormFile file)
         {
             if (!User.IsInRole("admin"))
                 return Forbid();
 
             if (file == null)
-                throw new BadRequestException("null");
+                //throw new BadRequestException("null");
+                return BadRequest("null");
 
             if (file.Length == 0)
-                throw new BadRequestException("0");
+                //throw new BadRequestException("0");
+                return BadRequest("0");
 
             // Validate file extension
             var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
             if (string.IsNullOrEmpty(extension))
-                throw new BadRequestException("empty extension");
+                //throw new BadRequestException("empty extension");
+                return BadRequest("empty extension");
 
             if (extension != ".db")
-                throw new BadRequestException("!= .db extension");
+                //throw new BadRequestException("!= .db extension");
+                return BadRequest("!= .db extension");
 
             var mimeTypes = new List<string> { "application/x-litedb", "application/octet-stream" };
             if (!mimeTypes.Contains(file.ContentType))
-                throw new BadRequestException("mime type");
+                //throw new BadRequestException("mime type");
+                return BadRequest("mime type");
 
             string databasePath = new FileInfo(_connectionString.Filename).FullName;
 

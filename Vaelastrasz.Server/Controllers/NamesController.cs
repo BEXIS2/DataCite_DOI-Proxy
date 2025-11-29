@@ -31,6 +31,8 @@ namespace Vaelastrasz.Server.Controllers
         /// </remarks>
         /// <exception cref="ArgumentNullException">Wird ausgelöst, wenn der übergebene Name null ist.</exception>
         [HttpPost("names")]
+        [ProducesResponseType(typeof(HumanName), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         public IActionResult Post([FromBody] string name)
         {
             if (string.IsNullOrEmpty(name))
