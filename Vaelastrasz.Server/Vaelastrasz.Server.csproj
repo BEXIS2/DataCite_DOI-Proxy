@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-	<Version>6.0.0</Version>
+	<Version>6.1.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,10 +22,10 @@
     <PackageReference Include="Fare" Version="2.2.1" />
     <PackageReference Include="LiteDB" Version="5.0.21" />
     <PackageReference Include="MethodTimer.Fody" Version="3.2.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
     <PackageReference Include="NameParserSharp" Version="1.5.0" />
-    <PackageReference Include="Scalar.AspNetCore" Version="2.11.8" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.12.36" />
     <PackageReference Include="Serilog" Version="4.3.0" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="10.0.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.0" />

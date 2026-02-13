@@ -23,7 +23,7 @@ namespace Vaelastrasz.Library.Tests.Services
 
                 var doiService = new DOIService(config);
 
-                var x = await doiService.FindAsync();
+                var x = await doiService.GetAsync();
 
                 //var dict = "{ \"placeholders\": { \"{DatasetId}\": \"340\", \"{VersionId}\": \"1408\", \"{VersionNumber}\": \"2\" } }";
 

@@ -5,19 +5,13 @@ using Vaelastrasz.Library.Types;
 
 namespace Vaelastrasz.Server.Services
 {
-    public class AccountService : IDisposable
+    public class AccountService
     {
         private readonly ConnectionString _connectionString;
-        private bool disposed = false;
 
         public AccountService(ConnectionString connectionString)
         {
             _connectionString = connectionString;
-        }
-
-        ~AccountService()
-        {
-            Dispose(false);
         }
 
         public async Task<long> CreateAsync(string name, string password, string host, string prefix, AccountType accountType)
@@ -56,13 +50,7 @@ namespace Vaelastrasz.Server.Services
             });
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        public async Task<List<Account>> FindAsync()
+        public async Task<List<Account>> GetAsync()
         {
             return await Task.Run(() =>
             {
@@ -73,7 +61,7 @@ namespace Vaelastrasz.Server.Services
             });
         }
 
-        public async Task<Account> FindByIdAsync(long id)
+        public async Task<Account> GetByIdAsync(long id)
         {
             return await Task.Run(() =>
             {
@@ -105,20 +93,6 @@ namespace Vaelastrasz.Server.Services
 
                 return accounts.Update(account);
             });
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    // dispose-only, i.e. non-finalizable logic
-                }
-
-                // shared cleanup logic
-                disposed = true;
-            }
         }
     }
 }

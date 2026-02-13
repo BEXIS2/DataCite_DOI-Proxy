@@ -49,8 +49,8 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
-            var user = await userService.FindByNameAsync(User.Identity.Name);
+            var userService = new UserService(_connectionString);
+            var user = await userService.GetByNameAsync(User.Identity.Name);
 
             if (user == null || user?.Account == null || string.IsNullOrEmpty(user.Account.Name) || string.IsNullOrEmpty(user.Account.Password))
                 return Forbid();
@@ -66,7 +66,7 @@ namespace Vaelastrasz.Server.Controllers
             if (!response.IsSuccessStatusCode)
                 return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
 
-            using var doiService = new DOIService(_connectionString);
+            var doiService = new DOIService(_connectionString);
             await doiService.DeleteByDOIAsync(doi);
             return StatusCode((int)response.StatusCode, JsonConvert.DeserializeObject<ReadDataCiteModel>(await response.Content.ReadAsStringAsync()));
         }
@@ -94,14 +94,14 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
-            var user = await userService.FindByNameAsync(User.Identity.Name);
+            var userService = new UserService(_connectionString);
+            var user = await userService.GetByNameAsync(User.Identity.Name);
 
             if (user == null || user?.Account == null || string.IsNullOrEmpty(user.Account.Name) || string.IsNullOrEmpty(user.Account.Password))
                 return Forbid();
 
             var doiService = new DOIService(_connectionString);
-            var dois = await doiService.FindByUserIdAsync(user.Id);
+            var dois = await doiService.GetByUserIdAsync(user.Id);
 
             var result = new List<ReadDataCiteModel>();
 
@@ -161,14 +161,14 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
-            var user = await userService.FindByNameAsync(User.Identity!.Name!);
+            var userService = new UserService(_connectionString);
+            var user = await userService.GetByNameAsync(User.Identity!.Name!);
 
             if (user == null || user?.Account == null || string.IsNullOrEmpty(user.Account.Name) || string.IsNullOrEmpty(user.Account.Password))
                 return Forbid();
 
-            using var doiService = new DOIService(_connectionString);
-            var doi = await doiService.FindByPrefixAndSuffixAsync(prefix, suffix);
+            var doiService = new DOIService(_connectionString);
+            var doi = await doiService.GetByPrefixAndSuffixAsync(prefix, suffix);
 
             if (doi.User.Id != user.Id)
                 throw new UnauthorizedException($"The user (id: {user.Id}) is not allowed to perform the action.");
@@ -212,14 +212,14 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
-            var user = await userService.FindByNameAsync(User.Identity.Name!);
+            var userService = new UserService(_connectionString);
+            var user = await userService.GetByNameAsync(User.Identity.Name!);
 
             if (user == null || user?.Account == null || string.IsNullOrEmpty(user.Account.Name) || string.IsNullOrEmpty(user.Account.Password))
                 return Forbid();
 
-            using var doiService = new DOIService(_connectionString);
-            var doi = await doiService.FindByPrefixAndSuffixAsync(prefix, suffix);
+            var doiService = new DOIService(_connectionString);
+            var doi = await doiService.GetByPrefixAndSuffixAsync(prefix, suffix);
 
             if (doi.User.Id != user.Id)
                 throw new UnauthorizedException($"The user (id: {user.Id}) is not allowed to perform the action.");
@@ -268,14 +268,14 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
-            var user = await userService.FindByNameAsync(User.Identity!.Name!);
+            var userService = new UserService(_connectionString);
+            var user = await userService.GetByNameAsync(User.Identity!.Name!);
 
             if (user == null || user?.Account == null || string.IsNullOrEmpty(user.Account.Name) || string.IsNullOrEmpty(user.Account.Password))
                 return Forbid();
 
-            using var doiService = new DOIService(_connectionString);
-            var doi = await doiService.FindByPrefixAndSuffixAsync(prefix, suffix);
+            var doiService = new DOIService(_connectionString);
+            var doi = await doiService.GetByPrefixAndSuffixAsync(prefix, suffix);
 
             if (doi.User.Id != user.Id)
                 throw new UnauthorizedException($"The user (id: {user.Id}) is not allowed to perform the action.");
@@ -322,15 +322,15 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
+            var userService = new UserService(_connectionString);
 
-            var user = await userService.FindByNameAsync(User.Identity.Name);
+            var user = await userService.GetByNameAsync(User.Identity.Name);
             if (user == null || user?.Account == null || string.IsNullOrEmpty(user.Account.Name) || string.IsNullOrEmpty(user.Account.Password))
                 return Forbid();
 
             // DOI Check
-            using var placeholderService = new PlaceholderService(_connectionString);
-            var placeholders = await placeholderService.FindByUserIdAsync(user.Id);
+            var placeholderService = new PlaceholderService(_connectionString);
+            var placeholders = await placeholderService.GetByUserIdAsync(user.Id);
             if (!DOIHelper.Validate(model.Data.Attributes.Doi, user.Account.Prefix, user.Pattern, new Dictionary<string, string>(placeholders.Select(p => new KeyValuePair<string, string>(p.Expression, p.RegularExpression)))))
                 throw new ForbiddenException($"The doi (doi: {model.Data.Attributes.Doi}) is invalid.");
 
@@ -342,7 +342,7 @@ namespace Vaelastrasz.Server.Controllers
                 DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{user.Account.Name}:{user.Account.Password}"))) }
             };
 
-            using var doiService = new DOIService(_connectionString);
+            var doiService = new DOIService(_connectionString);
             var doiId = await doiService.CreateAsync(model.Data.Attributes.Doi.GetPrefix(), model.Data.Attributes.Doi.GetSuffix(), (DOIStateType)model.Data.Attributes.Event, user.Id, JsonConvert.SerializeObject(model));
 
             var response = await client.PostAsync($"dois?publisher=true&affiliation=true", model.AsJson());
@@ -383,8 +383,8 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
-            var user = await userService.FindByNameAsync(User.Identity!.Name!);
+            var userService = new UserService(_connectionString);
+            var user = await userService.GetByNameAsync(User.Identity!.Name!);
 
             if (user == null || user?.Account == null || string.IsNullOrEmpty(user.Account.Name) || string.IsNullOrEmpty(user.Account.Password))
                 return Forbid();

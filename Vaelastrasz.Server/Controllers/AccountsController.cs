@@ -41,7 +41,7 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("admin"))
                 return Forbid();
 
-            using var accountService = new AccountService(_connectionString);
+            var accountService = new AccountService(_connectionString);
             var result = await accountService.DeleteByIdAsync(id);
 
             return Ok(result);
@@ -68,8 +68,8 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("admin"))
                 return Forbid();
 
-            using var accountService = new AccountService(_connectionString);
-            var result = await accountService.FindAsync();
+            var accountService = new AccountService(_connectionString);
+            var result = await accountService.GetAsync();
 
             return Ok(new List<ReadAccountModel>(result.Select(a => ReadAccountModel.Convert(a))));
         }
@@ -97,8 +97,8 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("admin"))
                 return Forbid();
 
-            using var accountService = new AccountService(_connectionString);
-            var result = await accountService.FindByIdAsync(id);
+            var accountService = new AccountService(_connectionString);
+            var result = await accountService.GetByIdAsync(id);
 
             return Ok(ReadAccountModel.Convert(result));
         }
@@ -125,10 +125,10 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("admin"))
                 return Forbid();
 
-            using var accountService = new AccountService(_connectionString);
+            var accountService = new AccountService(_connectionString);
 
             var id = await accountService.CreateAsync(model.Name, model.Password, model.Host, model.Prefix, model.AccountType);
-            var account = await accountService.FindByIdAsync(id);
+            var account = await accountService.GetByIdAsync(id);
 
             var request = HttpContext.Request;
             string baseUrl = $"{request.Scheme}://{request.Host}{request.PathBase}";
@@ -159,10 +159,10 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("admin"))
                 return Forbid();
 
-            using var accountService = new AccountService(_connectionString);
+            var accountService = new AccountService(_connectionString);
 
             var result = await accountService.UpdateByIdAsync(id, model.Name, model.Password, model.Host, model.Prefix);
-            var account = await accountService.FindByIdAsync(id);
+            var account = await accountService.GetByIdAsync(id);
 
             return Ok(ReadAccountModel.Convert(account));
         }

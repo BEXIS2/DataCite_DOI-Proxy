@@ -22,7 +22,7 @@ namespace Vaelastrasz.Library.Tests.Services
 
             var dataCiteService = new DataCiteService(config);
 
-            var x = await dataCiteService.FindAsync();
+            var x = await dataCiteService.GetAsync();
         }
 
         [Test]

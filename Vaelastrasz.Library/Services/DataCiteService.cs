@@ -65,7 +65,7 @@ namespace Vaelastrasz.Library.Services
             }
         }
 
-        public async Task<ApiResponse<List<ReadDataCiteModel>>> FindAsync()
+        public async Task<ApiResponse<List<ReadDataCiteModel>>> GetAsync()
         {
             try
             {
@@ -82,7 +82,7 @@ namespace Vaelastrasz.Library.Services
             }
         }
 
-        public async Task<ApiResponse<ReadDataCiteModel>> FindByDoiAsync(string doi)
+        public async Task<ApiResponse<ReadDataCiteModel>> GetByDoiAsync(string doi)
         {
             try
             {

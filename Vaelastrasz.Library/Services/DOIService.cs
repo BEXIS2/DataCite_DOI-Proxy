@@ -64,7 +64,7 @@ namespace Vaelastrasz.Library.Services
             }
         }
 
-        public async Task<ApiResponse<List<ReadDOIModel>>> FindAsync()
+        public async Task<ApiResponse<List<ReadDOIModel>>> GetAsync()
         {
             try
             {
@@ -81,7 +81,7 @@ namespace Vaelastrasz.Library.Services
             }
         }
 
-        public async Task<ApiResponse<ReadDOIModel>> FindByIdAsync(long id)
+        public async Task<ApiResponse<ReadDOIModel>> GetByIdAsync(long id)
         {
             try
             {

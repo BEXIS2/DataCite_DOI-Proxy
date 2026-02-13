@@ -8,6 +8,9 @@ namespace Vaelastrasz.Server.Filters
         {
             foreach (var arg in context.ActionArguments.Values)
             {
+                if (arg is null)
+                    continue;
+
                 ValidateObject(arg);
             }
         }

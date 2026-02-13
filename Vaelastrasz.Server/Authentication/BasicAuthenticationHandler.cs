@@ -65,7 +65,7 @@ namespace Vaelastrasz.Server.Authentication
 
                 if (await userService.ExistsByNameAsync(credentials[0]) && await userService.VerifyAsync(credentials[0], credentials[1]))
                 {
-                    var user = userService.FindByNameAsync(credentials[0]).Result;
+                    var user = userService.GetByNameAsync(credentials[0]).Result;
                     var accountType = EnumExtensions.GetEnumMemberValue(user.Account.AccountType);
 
                     var claims = new List<Claim>()

@@ -5,19 +5,13 @@ using Vaelastrasz.Library.Models;
 
 namespace Vaelastrasz.Server.Services
 {
-    public class DOIService : IDisposable
+    public class DOIService
     {
         private readonly ConnectionString _connectionString;
-        private bool disposed = false;
 
         public DOIService(ConnectionString connectionString)
         {
             _connectionString = connectionString;
-        }
-
-        ~DOIService()
-        {
-            Dispose(false);
         }
 
         public async Task<long> CreateAsync(string prefix, string suffix, DOIStateType state, long userId, string value)
@@ -101,13 +95,7 @@ namespace Vaelastrasz.Server.Services
             });
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        public async Task<List<DOI>> FindAsync()
+        public async Task<List<DOI>> GetAsync()
         {
             return await Task.Run(() =>
             {
@@ -118,7 +106,7 @@ namespace Vaelastrasz.Server.Services
             });
         }
 
-        public async Task<DOI> FindByDOIAsync(string doi)
+        public async Task<DOI> GetByDOIAsync(string doi)
         {
             return await Task.Run(() =>
             {
@@ -128,11 +116,11 @@ namespace Vaelastrasz.Server.Services
                 string prefix = doi.Split('/')[0];
                 string suffix = doi.Split('/')[1];
 
-                return FindByPrefixAndSuffixAsync(prefix, suffix);
+                return GetByPrefixAndSuffixAsync(prefix, suffix);
             });
         }
 
-        public async Task<DOI> FindByIdAsync(long id)
+        public async Task<DOI> GetByIdAsync(long id)
         {
             return await Task.Run(() =>
             {
@@ -145,7 +133,7 @@ namespace Vaelastrasz.Server.Services
             });
         }
 
-        public async Task<DOI> FindByPrefixAndSuffixAsync(string prefix, string suffix)
+        public async Task<DOI> GetByPrefixAndSuffixAsync(string prefix, string suffix)
         {
             return await Task.Run(() =>
             {
@@ -164,7 +152,7 @@ namespace Vaelastrasz.Server.Services
             });
         }
 
-        public async Task<List<DOI>> FindByPrefixAsync(string prefix)
+        public async Task<List<DOI>> GetByPrefixAsync(string prefix)
         {
             return await Task.Run(() =>
             {
@@ -175,7 +163,7 @@ namespace Vaelastrasz.Server.Services
             });
         }
 
-        public async Task<List<DOI>> FindBySuffixAsync(string suffix)
+        public async Task<List<DOI>> GetBySuffixAsync(string suffix)
         {
             return await Task.Run(() =>
             {
@@ -189,7 +177,7 @@ namespace Vaelastrasz.Server.Services
             });
         }
 
-        public async Task<List<DOI>> FindByUserIdAsync(long userId)
+        public async Task<List<DOI>> GetByUserIdAsync(long userId)
         {
             return await Task.Run(() =>
             {
@@ -239,7 +227,7 @@ namespace Vaelastrasz.Server.Services
                 var dois = db.GetCollection<DOI>("dois");
                 var users = db.GetCollection<User>("users");
 
-                var doi = FindByPrefixAndSuffixAsync(prefix, suffix).Result ?? throw new NotFoundException($"The doi (doi:{prefix}/{suffix}) does not exist.");
+                var doi = GetByPrefixAndSuffixAsync(prefix, suffix).Result ?? throw new NotFoundException($"The doi (doi:{prefix}/{suffix}) does not exist.");
 
                 doi.State = state;
                 doi.Value = value;
@@ -247,20 +235,6 @@ namespace Vaelastrasz.Server.Services
 
                 return dois.Update(doi);
             });
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    // dispose-only, i.e. non-finalizable logic
-                }
-
-                // shared cleanup logic
-                disposed = true;
-            }
         }
     }
 }

@@ -44,8 +44,8 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("user") || User.Identity?.Name == null)
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
-            var user = await userService.FindByNameAsync(User.Identity.Name);
+            var userService = new UserService(_connectionString);
+            var user = await userService.GetByNameAsync(User.Identity.Name);
 
             if (user?.Account == null || string.IsNullOrEmpty(user.Pattern))
                 return Forbid();
@@ -56,7 +56,7 @@ namespace Vaelastrasz.Server.Controllers
             // Validation
             var placeholderService = new PlaceholderService(_connectionString);
 
-            if (SuffixHelper.Validate(suffix, user.Pattern, new Dictionary<string, string>((await placeholderService.FindByUserIdAsync(user.Id)).Select(p => new KeyValuePair<string, string>(p.Expression, p.RegularExpression)))))
+            if (SuffixHelper.Validate(suffix, user.Pattern, new Dictionary<string, string>((await placeholderService.GetByUserIdAsync(user.Id)).Select(p => new KeyValuePair<string, string>(p.Expression, p.RegularExpression)))))
                 return Ok(suffix);
 
             //throw new BadRequestException($"The value of suffix ({suffix}) is invalid.");

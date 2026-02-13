@@ -5,19 +5,13 @@ using Vaelastrasz.Server.Utilities;
 
 namespace Vaelastrasz.Server.Services
 {
-    public class UserService : IDisposable
+    public class UserService
     {
         private readonly ConnectionString _connectionString;
-        private bool disposed = false;
 
         public UserService(ConnectionString connectionString)
         {
             _connectionString = connectionString;
-        }
-
-        ~UserService()
-        {
-            Dispose(false);
         }
 
         public async Task<long> CreateAsync(string name, string password, string project, string pattern, long accountId, bool isActive)
@@ -67,12 +61,6 @@ namespace Vaelastrasz.Server.Services
             });
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
         public async Task<bool> ExistsByNameAsync(string name)
         {
             using var db = new LiteDatabase(_connectionString);
@@ -86,7 +74,7 @@ namespace Vaelastrasz.Server.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<List<User>> FindAsync()
+        public async Task<List<User>> GetAsync()
         {
             List<User> users = new List<User>();
 
@@ -97,7 +85,7 @@ namespace Vaelastrasz.Server.Services
             return await Task.FromResult(users.ToList());
         }
 
-        public async Task<User> FindByIdAsync(long id)
+        public async Task<User> GetByIdAsync(long id)
         {
             using var db = new LiteDatabase(_connectionString);
             var col = db.GetCollection<User>("users");
@@ -107,7 +95,7 @@ namespace Vaelastrasz.Server.Services
             return await Task.FromResult(user) ?? throw new NotFoundException($"The user (id:{id}) does not exist.");
         }
 
-        public async Task<User> FindByNameAsync(string name)
+        public async Task<User> GetByNameAsync(string name)
         {
             using var db = new LiteDatabase(_connectionString);
             var col = db.GetCollection<User>("users");
@@ -155,20 +143,6 @@ namespace Vaelastrasz.Server.Services
             return user == null
                 ? throw new NotFoundException($"The user (name:{name}) does not exist.")
                 : await Task.FromResult(user.Password == CryptographyUtils.GetSHA512HashAsBase64(user.Salt, password));
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    // dispose-only, i.e. non-finalizable logic
-                }
-
-                // shared cleanup logic
-                disposed = true;
-            }
         }
     }
 }

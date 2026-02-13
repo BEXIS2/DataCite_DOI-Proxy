@@ -44,7 +44,7 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("admin"))
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
+            var userService = new UserService(_connectionString);
             var response = await userService.DeleteByIdAsync(id);
 
             return Ok(response);
@@ -72,8 +72,8 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("admin"))
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
-            var users = await userService.FindAsync();
+            var userService = new UserService(_connectionString);
+            var users = await userService.GetAsync();
 
             return Ok(users.Select(u => ReadUserModel.Convert(u)));
         }
@@ -101,8 +101,8 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("admin"))
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
-            var user = await userService.FindByIdAsync(id);
+            var userService = new UserService(_connectionString);
+            var user = await userService.GetByIdAsync(id);
 
             return Ok(ReadUserModel.Convert(user));
         }
@@ -134,10 +134,10 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("admin"))
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
+            var userService = new UserService(_connectionString);
 
             var id = await userService.CreateAsync(model.Name, model.Password, model.Project, model.Pattern, model.AccountId, true);
-            var user = await userService.FindByIdAsync(id);
+            var user = await userService.GetByIdAsync(id);
 
             if (user == null)
                 return BadRequest();
@@ -177,10 +177,10 @@ namespace Vaelastrasz.Server.Controllers
             if (!User.IsInRole("admin"))
                 return Forbid();
 
-            using var userService = new UserService(_connectionString);
+            var userService = new UserService(_connectionString);
 
             var result = await userService.UpdateByIdAsync(id, model.Name, model.Password, model.Project, model.Pattern, model.AccountId, model.IsActive);
-            var user = await userService.FindByIdAsync(id);
+            var user = await userService.GetByIdAsync(id);
 
             if (user == null)
                 return BadRequest();

@@ -24,7 +24,7 @@ namespace Vaelastrasz.Server.Tests
             //    var users = db.GetCollection<User>("users");
             //var user = users.FindById(null);
 
-            var user = await userService.FindByIdAsync(0);
+            var user = await userService.GetByIdAsync(0);
 
             ClassicAssert.IsNull(user);
         }
