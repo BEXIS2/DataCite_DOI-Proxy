@@ -24,6 +24,9 @@ namespace Vaelastrasz.Library.Models.DataCite
         [JsonProperty("relationType")]
         public DataCiteRelationType RelationType { get; set; }
 
+        [JsonProperty("relationTypeInformation")]
+        public string RelationTypeInformation { get; set; }
+
         [JsonProperty("resourceTypeGeneral")]
         public DataCiteResourceTypeGeneral ResourceTypeGeneral { get; set; }
 

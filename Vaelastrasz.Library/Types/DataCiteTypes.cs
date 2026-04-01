@@ -293,8 +293,14 @@ namespace Vaelastrasz.Library.Types
         [EnumMember(Value = "PURL")]
         PURL,
 
+        [EnumMember(Value = "RAiD")]
+        RAiD,
+
         [EnumMember(Value = "RRID")]
         RRID,
+
+        [EnumMember(Value = "SWHID")]
+        SWHID,
 
         [EnumMember(Value = "UPC")]
         UPC,
@@ -440,7 +446,10 @@ namespace Vaelastrasz.Library.Types
         IsTranslationOf,
 
         [EnumMember(Value = "HasTranslation")]
-        HasTranslation
+        HasTranslation,
+
+        [EnumMember(Value = "Other")]
+        Other
     }
 
     [JsonConverter(typeof(StringEnumConverter))]
@@ -506,8 +515,14 @@ namespace Vaelastrasz.Library.Types
         [EnumMember(Value = "PhysicalObject")]
         PhysicalObject,
 
+        [EnumMember(Value = "Poster")]
+        Poster,
+
         [EnumMember(Value = "Preprint")]
         Preprint,
+
+        [EnumMember(Value = "Presentation")]
+        Presentation,
 
         [EnumMember(Value = "Project")]
         Project,

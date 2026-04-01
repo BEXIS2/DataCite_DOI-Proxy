@@ -75,12 +75,15 @@ namespace Vaelastrasz.Server.Controllers
                 return Forbid();
 
             // database
-            FileInfo database = new FileInfo(_connectionString.Filename);
-
-            if (database == null || !database.Exists)
+            var databasePath = _connectionString.Filename;
+            var fileInfo = new FileInfo(databasePath);
+            if (!fileInfo.Exists)
                 return NotFound();
 
-            return File(System.IO.File.OpenRead(database.FullName), "application/octet-stream", $"{database.GetFileNameWithoutExtension()}_{DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmss")}{database.GetExtension()}");
+            var downloadFileName = $"{Path.GetFileNameWithoutExtension(fileInfo.Name)}_{DateTimeOffset.UtcNow:yyyyMMddHHmmss}{Path.GetExtension(fileInfo.Name)}";
+
+            var fileStream = System.IO.File.OpenRead(databasePath);
+            return File(fileStream, "application/octet-stream", downloadFileName);
         }
 
         /// <summary>
