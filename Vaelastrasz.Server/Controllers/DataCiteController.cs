@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using Vaelastrasz.Library.Exceptions;
 using Vaelastrasz.Library.Extensions;
+using Vaelastrasz.Library.Helpers;
 using Vaelastrasz.Library.Models;
 using Vaelastrasz.Server.Attributes;
 using Vaelastrasz.Server.Helpers;
@@ -375,11 +376,13 @@ namespace Vaelastrasz.Server.Controllers
         /// Stellen Sie sicher, dass die Account-Daten des Benutzers gültig sind, um die Aktualisierung durchzuführen.
         /// </remarks>
         /// <exception cref="NotFoundException">Wird ausgelöst, wenn das Konto des Benutzers nicht existiert.</exception>
-        [HttpPut("datacite/{doi}")]
+        [HttpPut("datacite/{*doi}")]
         [ProducesResponseType(typeof(ReadDataCiteModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> PutByDOIAsync(string doi, UpdateDataCiteModel model)
         {
+            doi = DecodeHelper.SafeDecode(doi);
+
             if (!User.IsInRole("user-datacite") || User?.Identity?.Name == null)
                 return Forbid();
 
@@ -395,7 +398,7 @@ namespace Vaelastrasz.Server.Controllers
                 DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{user.Account.Name}:{user.Account.Password}"))) }
             };
 
-            var response = await client.PutAsync($"dois/{doi}?publisher=true&affiliation=true", model.AsJson());
+            var response = await client.PutAsync($"dois/{doi}?publisher=true&affiliation=true", model.AsMinimalJson());
 
             if (!response.IsSuccessStatusCode)
                 return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());

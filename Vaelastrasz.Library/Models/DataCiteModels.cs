@@ -337,18 +337,6 @@ namespace Vaelastrasz.Library.Models
 
     public class UpdateDataCiteAttributesModel
     {
-        public UpdateDataCiteAttributesModel()
-        {
-            Creators = new List<DataCiteCreator>();
-            Contributors = new List<DataCiteCreator>();
-            Dates = new List<DataCiteDate>();
-            Descriptions = new List<DataCiteDescription>();
-            Identifiers = new List<DataCiteIdentifier>();
-            Subjects = new List<DataCiteSubject>();
-            Titles = new List<DataCiteTitle>();
-            RelatedIdentifiers = new List<DataCiteRelatedIdentifier>();
-        }
-
         [JsonProperty("contributors")]
         public List<DataCiteCreator> Contributors { get; set; }
 
@@ -381,6 +369,10 @@ namespace Vaelastrasz.Library.Models
 
         [JsonProperty("relatedIdentifiers")]
         public List<DataCiteRelatedIdentifier> RelatedIdentifiers { get; set; }
+
+        // 16 - https://datacite-metadata-schema.readthedocs.io/en/4.5/properties/rights/#
+        [JsonProperty("rightsList")]
+        public List<DataCiteRight> RightsList { get; set; }
 
         [JsonProperty("subjects")]
         public List<DataCiteSubject> Subjects { get; set; }
