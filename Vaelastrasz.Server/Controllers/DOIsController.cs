@@ -196,7 +196,7 @@ namespace Vaelastrasz.Server.Controllers
                 throw new ForbiddenException($"The doi (prefix: {model.Prefix}, suffix: {model.Suffix}) is invalid.");
 
             var doiService = new DOIService(_connectionString);
-            var id = await doiService.CreateAsync(model.Prefix, model.Suffix, DOIStateType.Draft, user.Id, "");
+            var id = await doiService.CreateAsync(model.Prefix, model.Suffix, model.Status, user.Id, "");
             var doi = await doiService.GetByIdAsync(id);
 
             var request = HttpContext.Request;
