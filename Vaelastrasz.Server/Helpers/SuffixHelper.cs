@@ -10,7 +10,8 @@ namespace Vaelastrasz.Server.Helpers
         {
             try
             {
-                pattern = pattern.Replace(placeholders);
+                if(placeholders != null)
+                    pattern = pattern.Replace(placeholders);
 
                 if (!pattern.IsValidRegex())
                     throw new ArgumentException("After replacing the placeholder, the pattern is no longer a regular expression.");
