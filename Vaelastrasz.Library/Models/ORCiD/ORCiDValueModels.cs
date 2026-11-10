@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Vaelastrasz.Library.Models.ORCiD
 {
@@ -9,7 +6,6 @@ namespace Vaelastrasz.Library.Models.ORCiD
     {
         public ORCiDString()
         { }
-
 
         [JsonProperty("value")]
         public string Value { get; set; }
@@ -19,7 +15,6 @@ namespace Vaelastrasz.Library.Models.ORCiD
     {
         public ORCiDInteger()
         { }
-
 
         [JsonProperty("value")]
         public int Value { get; set; }

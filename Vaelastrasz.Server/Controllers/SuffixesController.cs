@@ -39,7 +39,7 @@ namespace Vaelastrasz.Server.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> PostAsync(CreateSuffixModel model)
+        public async Task<IActionResult> PostAsync(CreateSuffixModel? model = null)
         {
             if (!User.IsInRole("user") || User.Identity?.Name == null)
                 return Forbid();
@@ -51,7 +51,7 @@ namespace Vaelastrasz.Server.Controllers
                 return Forbid();
 
             // Suffix
-            var suffix = SuffixHelper.Create(user.Pattern, model.Placeholders);
+            var suffix = SuffixHelper.Create(user.Pattern, model?.Placeholders);
 
             // Validation
             var placeholderService = new PlaceholderService(_connectionString);

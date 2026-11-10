@@ -17,22 +17,18 @@ namespace Vaelastrasz.Library.Models
         [JsonProperty("preferences")]
         public Preferences Preferences { get; set; }
 
-
         [JsonProperty("history")]
         public ORCiDHistory History { get; set; }
 
         [JsonProperty("person")]
         public ORCiDPerson Person { get; set; }
 
-
-
         public ReadORCiDModel()
         {
         }
     }
 
-    #endregion
-
+    #endregion read
 
     public class ActivitiesSummary
     {
@@ -108,7 +104,7 @@ namespace Vaelastrasz.Library.Models
 
         [JsonProperty("last-modified-date")]
         public ORCiDDate LastModifiedDate { get; set; }
-            
+
         public List<Summary> summaries { get; set; }
     }
 

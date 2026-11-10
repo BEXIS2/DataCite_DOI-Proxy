@@ -10,7 +10,7 @@ namespace Vaelastrasz.Server.Helpers
         {
             try
             {
-                if(placeholders != null)
+                if (placeholders != null && placeholders.Count > 0)
                     pattern = pattern.Replace(placeholders);
 
                 if (!pattern.IsValidRegex())

@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Vaelastrasz.Library.Models.ORCiD
 {
@@ -9,7 +7,6 @@ namespace Vaelastrasz.Library.Models.ORCiD
     {
         [JsonProperty("last-modified-date")]
         public ORCiDDate LastModifiedDate { get; set; }
-
 
         [JsonProperty("keyword")]
         public List<string> Keyword { get; set; }
