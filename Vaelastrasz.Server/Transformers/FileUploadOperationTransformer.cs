@@ -42,19 +42,30 @@ namespace Vaelastrasz.Server.Transformers
             // Multipart-Form / Datei-Upload wie gehabt
             if (operation.RequestBody?.Content?.ContainsKey("multipart/form-data") == true)
             {
+                var mediaType = operation.RequestBody.Content["multipart/form-data"];
+
                 var schema = new OpenApiSchema
                 {
                     Type = JsonSchemaType.Object,
-                    Properties = new Dictionary<string, IOpenApiSchema>()  // ← WICHTIG
+                    Properties = new Dictionary<string, IOpenApiSchema>
+                    {
+                        ["file"] = new OpenApiSchema
+                        {
+                            Type = JsonSchemaType.Object,
+                            Format = "binary"
+                        }
+                    }
                 };
 
-                schema.Properties["file"] = new OpenApiSchema
+                // ✅ Erstelle ein neues OpenApiMediaType mit dem neuen Schema
+                var newMediaType = new OpenApiMediaType
                 {
-                    Type = JsonSchemaType.Object,
-                    Format = "binary"
+                    Schema = schema
+                    // Optional: Kopiere andere Eigenschaften wie Examples, Encoding, etc.
                 };
 
-                operation.RequestBody.Content["multipart/form-data"].Schema = schema;
+                // ✅ Ersetze das alte MediaType im Dictionary
+                operation.RequestBody.Content["multipart/form-data"] = newMediaType;
             }
 
             return Task.CompletedTask;
