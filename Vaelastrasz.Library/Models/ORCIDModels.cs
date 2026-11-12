@@ -1,9 +1,35 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using Vaelastrasz.Library.Models.ORCiD;
 
 namespace Vaelastrasz.Library.Models
 {
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+    #region read
+
+    public class ReadORCiDModel
+    {
+        [JsonProperty("path")]
+        public string Path { get; set; }
+
+        [JsonProperty("orcid-identifier")]
+        public ORCiDIdentifier ORCiDIdentifier { get; set; }
+
+        [JsonProperty("preferences")]
+        public Preferences Preferences { get; set; }
+
+        [JsonProperty("history")]
+        public ORCiDHistory History { get; set; }
+
+        [JsonProperty("person")]
+        public ORCiDPerson Person { get; set; }
+
+        public ReadORCiDModel()
+        {
+        }
+    }
+
+    #endregion read
+
     public class ActivitiesSummary
     {
         public Distinctions distinctions { get; set; }
@@ -18,7 +44,7 @@ namespace Vaelastrasz.Library.Models
         public InvitedPositions invitedpositions { get; set; }
 
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         public Memberships memberships { get; set; }
 
@@ -49,7 +75,7 @@ namespace Vaelastrasz.Library.Models
         public int displayindex { get; set; }
 
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         public string path { get; set; }
 
@@ -66,7 +92,7 @@ namespace Vaelastrasz.Library.Models
         public List<Address> address { get; set; }
 
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         public string path { get; set; }
     }
@@ -77,7 +103,7 @@ namespace Vaelastrasz.Library.Models
         public ExternalIds externalids { get; set; }
 
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         public List<Summary> summaries { get; set; }
     }
@@ -123,7 +149,7 @@ namespace Vaelastrasz.Library.Models
         public List<AffiliationGroup> affiliationgroup { get; set; }
 
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         public string path { get; set; }
     }
@@ -146,7 +172,7 @@ namespace Vaelastrasz.Library.Models
         public object externalids { get; set; }
 
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         public Organization organization { get; set; }
         public string path { get; set; }
@@ -182,7 +208,7 @@ namespace Vaelastrasz.Library.Models
         public List<AffiliationGroup> affiliationgroup { get; set; }
 
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         public string path { get; set; }
     }
@@ -205,7 +231,7 @@ namespace Vaelastrasz.Library.Models
         public object externalids { get; set; }
 
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         public Organization organization { get; set; }
         public string path { get; set; }
@@ -283,7 +309,7 @@ namespace Vaelastrasz.Library.Models
         public object deactivationdate { get; set; }
 
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         public object source { get; set; }
 
@@ -318,11 +344,6 @@ namespace Vaelastrasz.Library.Models
         public string path { get; set; }
     }
 
-    public class LastModifiedDate
-    {
-        public long value { get; set; }
-    }
-
     public class Memberships
     {
         [JsonProperty("affiliation-group")]
@@ -354,7 +375,7 @@ namespace Vaelastrasz.Library.Models
         public GivenNames givennames { get; set; }
 
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         public string path { get; set; }
         public object source { get; set; }
@@ -397,7 +418,7 @@ namespace Vaelastrasz.Library.Models
         public Keywords keywords { get; set; }
 
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         public Name name { get; set; }
 
@@ -431,7 +452,7 @@ namespace Vaelastrasz.Library.Models
         public int displayindex { get; set; }
 
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         public string path { get; set; }
 
@@ -445,7 +466,7 @@ namespace Vaelastrasz.Library.Models
     public class OtherNames
     {
         [JsonProperty("last-modified-date")]
-        public LastModifiedDate lastmodifieddate { get; set; }
+        public ORCiDDate LastModifiedDate { get; set; }
 
         [JsonProperty("other-name")]
         public List<OtherName> othername { get; set; }

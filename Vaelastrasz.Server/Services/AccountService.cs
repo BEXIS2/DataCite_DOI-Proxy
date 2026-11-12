@@ -1,6 +1,8 @@
 ﻿using LiteDB;
 using Vaelastrasz.Library.Entities;
 using Vaelastrasz.Library.Exceptions;
+using Vaelastrasz.Library.Extensions;
+using Vaelastrasz.Library.Filters;
 using Vaelastrasz.Library.Types;
 
 namespace Vaelastrasz.Server.Services
@@ -58,6 +60,26 @@ namespace Vaelastrasz.Server.Services
                 var col = db.GetCollection<Account>("accounts");
 
                 return col.Query().ToList();
+            });
+        }
+
+        public async Task<List<Account>> QueryAsync(QueryFilter filter)
+        {
+            return await Task.Run(() =>
+            {
+                using var db = new LiteDatabase(_connectionString);
+                var col = db.GetCollection<Account>("accounts");
+
+                var accounts = col.Query().ToList().AsQueryable();
+
+                var pageNumber = Math.Max(1, filter.PageNumber);
+                var pageSize = Math.Clamp(filter.PageSize, 1, 50);
+
+                accounts = accounts.ApplySearch(filter.Search);
+                accounts = accounts.ApplySort(filter.SortBy);
+                accounts = accounts.ApplyPagination(pageNumber, pageSize);
+
+                return accounts.ToList();
             });
         }
 

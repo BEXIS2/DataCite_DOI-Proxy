@@ -3,6 +3,7 @@ using MethodTimer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vaelastrasz.Library.Exceptions;
+using Vaelastrasz.Library.Filters;
 using Vaelastrasz.Library.Models;
 using Vaelastrasz.Server.Configurations;
 using Vaelastrasz.Server.Helpers;
@@ -81,7 +82,7 @@ namespace Vaelastrasz.Server.Controllers
         [HttpGet("dois")]
         [ProducesResponseType(typeof(ReadDOIModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> GetAsync()
+        public async Task<IActionResult> GetAsync([FromQuery] QueryFilter filter)
         {
             if (!User.IsInRole("user") || User?.Identity?.Name == null)
                 return Forbid();

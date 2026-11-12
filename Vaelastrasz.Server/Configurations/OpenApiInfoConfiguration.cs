@@ -5,15 +5,15 @@ namespace Vaelastrasz.Server.Configurations
 {
     public class OpenApiInfoConfiguration
     {
-        public required string Title { get; set; }
-        public required string Description { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
 
         [Url]
         public string? TermsOfService { get; set; }
 
-        public required OpenApiContactConfiguration Contact { get; set; }
+        public OpenApiContactConfiguration Contact { get; set; }
 
-        public required OpenApiLicenseConfiguration License { get; set; }
+        public OpenApiLicenseConfiguration License { get; set; }
 
         public OpenApiInfo GetOpenApiInfo()
         {
@@ -44,7 +44,7 @@ namespace Vaelastrasz.Server.Configurations
 
     public class OpenApiContactConfiguration
     {
-        public required string Name { get; set; }
+        public string Name { get; set; }
 
         [EmailAddress]
         public string? Email { get; set; }
@@ -55,7 +55,7 @@ namespace Vaelastrasz.Server.Configurations
 
     public class OpenApiLicenseConfiguration
     {
-        public required string Name { get; set; }
+        public string Name { get; set; }
 
         [Url]
         public string? Url { get; set; }

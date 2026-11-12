@@ -1,6 +1,8 @@
 ﻿using LiteDB;
 using Vaelastrasz.Library.Entities;
 using Vaelastrasz.Library.Exceptions;
+using Vaelastrasz.Library.Extensions;
+using Vaelastrasz.Library.Filters;
 using Vaelastrasz.Library.Models;
 
 namespace Vaelastrasz.Server.Services
@@ -103,6 +105,26 @@ namespace Vaelastrasz.Server.Services
                 var col = db.GetCollection<DOI>("dois");
 
                 return col.FindAll().ToList();
+            });
+        }
+
+        public async Task<List<DOI>> QueryAsync(QueryFilter filter)
+        {
+            return await Task.Run(() =>
+            {
+                using var db = new LiteDatabase(_connectionString);
+                var col = db.GetCollection<DOI>("dois");
+
+                var dois = col.Query().ToList().AsQueryable();
+
+                var pageNumber = Math.Max(1, filter.PageNumber);
+                var pageSize = Math.Clamp(filter.PageSize, 1, 50);
+
+                dois = dois.ApplySearch(filter.Search);
+                dois = dois.ApplySort(filter.SortBy);
+                dois = dois.ApplyPagination(pageNumber, pageSize);
+
+                return dois.ToList();
             });
         }
 

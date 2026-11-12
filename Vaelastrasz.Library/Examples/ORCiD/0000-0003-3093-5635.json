@@ -1,0 +1,504 @@
+{
+  "orcid-identifier": {
+    "uri": "https://orcid.org/0000-0003-3093-5635",
+    "path": "0000-0003-3093-5635",
+    "host": "orcid.org"
+  },
+  "preferences": {
+    "locale": "en"
+  },
+  "history": {
+    "creation-method": "DIRECT",
+    "completion-date": null,
+    "submission-date": {
+      "value": 1416491791812
+    },
+    "last-modified-date": {
+      "value": 1744094186993
+    },
+    "claimed": true,
+    "source": null,
+    "deactivation-date": null,
+    "verified-email": true,
+    "verified-primary-email": true
+  },
+  "person": {
+    "last-modified-date": {
+      "value": 1540457053751
+    },
+    "name": {
+      "created-date": {
+        "value": 1460764734253
+      },
+      "last-modified-date": {
+        "value": 1460764734253
+      },
+      "given-names": {
+        "value": "Sven"
+      },
+      "family-name": {
+        "value": "Thiel"
+      },
+      "credit-name": null,
+      "source": null,
+      "visibility": "public",
+      "path": "0000-0003-3093-5635"
+    },
+    "other-names": {
+      "last-modified-date": {
+        "value": 1540457053751
+      },
+      "other-name": [
+        {
+          "created-date": {
+            "value": 1540457053751
+          },
+          "last-modified-date": {
+            "value": 1540457053751
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0003-3093-5635",
+              "path": "0000-0003-3093-5635",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Sven Thiel"
+            },
+            "assertion-origin-orcid": null,
+            "assertion-origin-client-id": null,
+            "assertion-origin-name": null
+          },
+          "content": "Sven Thiel",
+          "visibility": "public",
+          "path": "/0000-0003-3093-5635/other-names/1165242",
+          "put-code": 1165242,
+          "display-index": 1
+        }
+      ],
+      "path": "/0000-0003-3093-5635/other-names"
+    },
+    "biography": null,
+    "researcher-urls": {
+      "last-modified-date": null,
+      "researcher-url": [],
+      "path": "/0000-0003-3093-5635/researcher-urls"
+    },
+    "emails": {
+      "last-modified-date": null,
+      "email": [],
+      "path": "/0000-0003-3093-5635/email"
+    },
+    "addresses": {
+      "last-modified-date": {
+        "value": 1465226976952
+      },
+      "address": [
+        {
+          "created-date": {
+            "value": 1453659931797
+          },
+          "last-modified-date": {
+            "value": 1465226976952
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0003-3093-5635",
+              "path": "0000-0003-3093-5635",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Sven Thiel"
+            },
+            "assertion-origin-orcid": null,
+            "assertion-origin-client-id": null,
+            "assertion-origin-name": null
+          },
+          "country": {
+            "value": "DE"
+          },
+          "visibility": "public",
+          "path": "/0000-0003-3093-5635/address/252305",
+          "put-code": 252305,
+          "display-index": 0
+        }
+      ],
+      "path": "/0000-0003-3093-5635/address"
+    },
+    "keywords": {
+      "last-modified-date": null,
+      "keyword": [],
+      "path": "/0000-0003-3093-5635/keywords"
+    },
+    "external-identifiers": {
+      "last-modified-date": null,
+      "external-identifier": [],
+      "path": "/0000-0003-3093-5635/external-identifiers"
+    },
+    "path": "/0000-0003-3093-5635/person"
+  },
+  "activities-summary": {
+    "last-modified-date": {
+      "value": 1536222977130
+    },
+    "distinctions": {
+      "last-modified-date": null,
+      "affiliation-group": [],
+      "path": "/0000-0003-3093-5635/distinctions"
+    },
+    "educations": {
+      "last-modified-date": {
+        "value": 1536222824745
+      },
+      "affiliation-group": [
+        {
+          "last-modified-date": {
+            "value": 1536222824745
+          },
+          "external-ids": {
+            "external-id": []
+          },
+          "summaries": [
+            {
+              "education-summary": {
+                "created-date": {
+                  "value": 1536222824745
+                },
+                "last-modified-date": {
+                  "value": 1536222824745
+                },
+                "source": {
+                  "source-orcid": {
+                    "uri": "https://orcid.org/0000-0003-3093-5635",
+                    "path": "0000-0003-3093-5635",
+                    "host": "orcid.org"
+                  },
+                  "source-client-id": null,
+                  "source-name": {
+                    "value": "Sven Thiel"
+                  },
+                  "assertion-origin-orcid": null,
+                  "assertion-origin-client-id": null,
+                  "assertion-origin-name": null
+                },
+                "put-code": 6384480,
+                "department-name": null,
+                "role-title": "Diplom Bioinformatik",
+                "start-date": {
+                  "year": {
+                    "value": "2006"
+                  },
+                  "month": {
+                    "value": "10"
+                  },
+                  "day": {
+                    "value": "01"
+                  }
+                },
+                "end-date": {
+                  "year": {
+                    "value": "2011"
+                  },
+                  "month": {
+                    "value": "04"
+                  },
+                  "day": {
+                    "value": "25"
+                  }
+                },
+                "organization": {
+                  "name": "Friedrich-Schiller-Universität Jena",
+                  "address": {
+                    "city": "Jena",
+                    "region": "Thüringen",
+                    "country": "DE"
+                  },
+                  "disambiguated-organization": {
+                    "disambiguated-organization-identifier": "9378",
+                    "disambiguation-source": "RINGGOLD"
+                  }
+                },
+                "url": null,
+                "external-ids": null,
+                "display-index": "1",
+                "visibility": "public",
+                "path": "/0000-0003-3093-5635/education/6384480"
+              }
+            }
+          ]
+        }
+      ],
+      "path": "/0000-0003-3093-5635/educations"
+    },
+    "employments": {
+      "last-modified-date": {
+        "value": 1536222977130
+      },
+      "affiliation-group": [
+        {
+          "last-modified-date": {
+            "value": 1536222899540
+          },
+          "external-ids": {
+            "external-id": []
+          },
+          "summaries": [
+            {
+              "employment-summary": {
+                "created-date": {
+                  "value": 1536222899540
+                },
+                "last-modified-date": {
+                  "value": 1536222899540
+                },
+                "source": {
+                  "source-orcid": {
+                    "uri": "https://orcid.org/0000-0003-3093-5635",
+                    "path": "0000-0003-3093-5635",
+                    "host": "orcid.org"
+                  },
+                  "source-client-id": null,
+                  "source-name": {
+                    "value": "Sven Thiel"
+                  },
+                  "assertion-origin-orcid": null,
+                  "assertion-origin-client-id": null,
+                  "assertion-origin-name": null
+                },
+                "put-code": 6384490,
+                "department-name": null,
+                "role-title": null,
+                "start-date": {
+                  "year": {
+                    "value": "2018"
+                  },
+                  "month": {
+                    "value": "04"
+                  },
+                  "day": {
+                    "value": "15"
+                  }
+                },
+                "end-date": null,
+                "organization": {
+                  "name": "Friedrich-Schiller-Universität Jena",
+                  "address": {
+                    "city": "Jena",
+                    "region": "Thüringen",
+                    "country": "DE"
+                  },
+                  "disambiguated-organization": {
+                    "disambiguated-organization-identifier": "9378",
+                    "disambiguation-source": "RINGGOLD"
+                  }
+                },
+                "url": null,
+                "external-ids": null,
+                "display-index": "1",
+                "visibility": "public",
+                "path": "/0000-0003-3093-5635/employment/6384490"
+              }
+            }
+          ]
+        },
+        {
+          "last-modified-date": {
+            "value": 1536222977130
+          },
+          "external-ids": {
+            "external-id": []
+          },
+          "summaries": [
+            {
+              "employment-summary": {
+                "created-date": {
+                  "value": 1536222946604
+                },
+                "last-modified-date": {
+                  "value": 1536222977130
+                },
+                "source": {
+                  "source-orcid": {
+                    "uri": "https://orcid.org/0000-0003-3093-5635",
+                    "path": "0000-0003-3093-5635",
+                    "host": "orcid.org"
+                  },
+                  "source-client-id": null,
+                  "source-name": {
+                    "value": "Sven Thiel"
+                  },
+                  "assertion-origin-orcid": null,
+                  "assertion-origin-client-id": null,
+                  "assertion-origin-name": null
+                },
+                "put-code": 6384495,
+                "department-name": null,
+                "role-title": null,
+                "start-date": {
+                  "year": {
+                    "value": "2014"
+                  },
+                  "month": {
+                    "value": "10"
+                  },
+                  "day": {
+                    "value": "15"
+                  }
+                },
+                "end-date": {
+                  "year": {
+                    "value": "2018"
+                  },
+                  "month": {
+                    "value": "04"
+                  },
+                  "day": {
+                    "value": "14"
+                  }
+                },
+                "organization": {
+                  "name": "Technische Universität München",
+                  "address": {
+                    "city": "Munchen",
+                    "region": "Bayern",
+                    "country": "DE"
+                  },
+                  "disambiguated-organization": {
+                    "disambiguated-organization-identifier": "9184",
+                    "disambiguation-source": "RINGGOLD"
+                  }
+                },
+                "url": null,
+                "external-ids": null,
+                "display-index": "1",
+                "visibility": "public",
+                "path": "/0000-0003-3093-5635/employment/6384495"
+              }
+            }
+          ]
+        },
+        {
+          "last-modified-date": {
+            "value": 1536222693203
+          },
+          "external-ids": {
+            "external-id": []
+          },
+          "summaries": [
+            {
+              "employment-summary": {
+                "created-date": {
+                  "value": 1536222693203
+                },
+                "last-modified-date": {
+                  "value": 1536222693203
+                },
+                "source": {
+                  "source-orcid": {
+                    "uri": "https://orcid.org/0000-0003-3093-5635",
+                    "path": "0000-0003-3093-5635",
+                    "host": "orcid.org"
+                  },
+                  "source-client-id": null,
+                  "source-name": {
+                    "value": "Sven Thiel"
+                  },
+                  "assertion-origin-orcid": null,
+                  "assertion-origin-client-id": null,
+                  "assertion-origin-name": null
+                },
+                "put-code": 6384469,
+                "department-name": null,
+                "role-title": null,
+                "start-date": {
+                  "year": {
+                    "value": "2011"
+                  },
+                  "month": {
+                    "value": "08"
+                  },
+                  "day": {
+                    "value": "15"
+                  }
+                },
+                "end-date": {
+                  "year": {
+                    "value": "2014"
+                  },
+                  "month": {
+                    "value": "10"
+                  },
+                  "day": {
+                    "value": "14"
+                  }
+                },
+                "organization": {
+                  "name": "Friedrich-Schiller-Universität Jena",
+                  "address": {
+                    "city": "Jena",
+                    "region": "Thüringen",
+                    "country": "DE"
+                  },
+                  "disambiguated-organization": {
+                    "disambiguated-organization-identifier": "9378",
+                    "disambiguation-source": "RINGGOLD"
+                  }
+                },
+                "url": null,
+                "external-ids": null,
+                "display-index": "1",
+                "visibility": "public",
+                "path": "/0000-0003-3093-5635/employment/6384469"
+              }
+            }
+          ]
+        }
+      ],
+      "path": "/0000-0003-3093-5635/employments"
+    },
+    "fundings": {
+      "last-modified-date": null,
+      "group": [],
+      "path": "/0000-0003-3093-5635/fundings"
+    },
+    "invited-positions": {
+      "last-modified-date": null,
+      "affiliation-group": [],
+      "path": "/0000-0003-3093-5635/invited-positions"
+    },
+    "memberships": {
+      "last-modified-date": null,
+      "affiliation-group": [],
+      "path": "/0000-0003-3093-5635/memberships"
+    },
+    "peer-reviews": {
+      "last-modified-date": null,
+      "group": [],
+      "path": "/0000-0003-3093-5635/peer-reviews"
+    },
+    "qualifications": {
+      "last-modified-date": null,
+      "affiliation-group": [],
+      "path": "/0000-0003-3093-5635/qualifications"
+    },
+    "research-resources": {
+      "last-modified-date": null,
+      "group": [],
+      "path": "/0000-0003-3093-5635/research-resources"
+    },
+    "services": {
+      "last-modified-date": null,
+      "affiliation-group": [],
+      "path": "/0000-0003-3093-5635/services"
+    },
+    "works": {
+      "last-modified-date": null,
+      "group": [],
+      "path": "/0000-0003-3093-5635/works"
+    },
+    "path": "/0000-0003-3093-5635/activities"
+  },
+  "path": "/0000-0003-3093-5635"
+}

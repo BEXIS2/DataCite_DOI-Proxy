@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Vaelastrasz.Library.Configurations;
 using Vaelastrasz.Library.Extensions;
+using Vaelastrasz.Library.Filters;
 using Vaelastrasz.Library.Models;
 using Vaelastrasz.Library.Types;
 
@@ -66,6 +67,23 @@ namespace Vaelastrasz.Library.Services
         }
 
         public async Task<ApiResponse<List<ReadDataCiteModel>>> GetAsync()
+        {
+            try
+            {
+                var response = await _client.GetAsync($"api/datacite");
+
+                if (!response.IsSuccessStatusCode)
+                    return ApiResponse<List<ReadDataCiteModel>>.Failure(await response.Content.ReadAsStringAsync(), response.StatusCode);
+
+                return ApiResponse<List<ReadDataCiteModel>>.Success(JsonConvert.DeserializeObject<List<ReadDataCiteModel>>(await response.Content.ReadAsStringAsync()), response.StatusCode);
+            }
+            catch (Exception ex)
+            {
+                return ApiResponse<List<ReadDataCiteModel>>.Failure(JsonConvert.SerializeObject(ex), HttpStatusCode.InternalServerError);
+            }
+        }
+
+        public async Task<ApiResponse<List<ReadDataCiteModel>>> QueryAsync(QueryFilter filter)
         {
             try
             {

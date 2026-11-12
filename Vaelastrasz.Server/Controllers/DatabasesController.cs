@@ -3,7 +3,6 @@ using MethodTimer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vaelastrasz.Library.Exceptions;
-using Vaelastrasz.Library.Extensions;
 using Vaelastrasz.Library.Models;
 
 namespace Vaelastrasz.Server.Controllers

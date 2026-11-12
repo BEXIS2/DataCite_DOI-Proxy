@@ -3,6 +3,7 @@ using MethodTimer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vaelastrasz.Library.Exceptions;
+using Vaelastrasz.Library.Filters;
 using Vaelastrasz.Server.Configurations;
 using Vaelastrasz.Server.Models;
 using Vaelastrasz.Server.Services;
@@ -73,7 +74,7 @@ namespace Vaelastrasz.Server.Controllers
         [HttpGet("placeholders")]
         [ProducesResponseType(typeof(IEnumerable<ReadPlaceholderModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> GetAsync()
+        public async Task<IActionResult> GetAsync(QueryFilter filter)
         {
             var placeholderService = new PlaceholderService(_connectionString);
 
@@ -85,7 +86,7 @@ namespace Vaelastrasz.Server.Controllers
 
             if (User.IsInRole("admin"))
             {
-                var placeholders = (await placeholderService.GetAsync()).Select(p => ReadPlaceholderModel.Convert(p));
+                var placeholders = (await placeholderService.QueryAsync(filter)).Select(p => ReadPlaceholderModel.Convert(p));
                 return Ok(placeholders);
             }
 

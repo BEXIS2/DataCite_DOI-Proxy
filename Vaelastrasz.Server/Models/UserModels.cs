@@ -11,19 +11,19 @@ namespace Vaelastrasz.Server.Models
         public bool IsActive { get; set; }
 
         [Required]
-        public required string Name { get; set; }
+        public string Name { get; set; }
 
         [Required]
-        public required string Password { get; set; }
+        public string Password { get; set; }
 
-        public required string Pattern { get; set; }
-        public required string Project { get; set; }
+        public string Pattern { get; set; }
+        public string Project { get; set; }
     }
 
     public class LoginUserModel
     {
-        public required string Password { get; set; }
-        public required string Username { get; set; }
+        public string Password { get; set; }
+        public string Username { get; set; }
     }
 
     public class ReadUserModel
@@ -33,9 +33,9 @@ namespace Vaelastrasz.Server.Models
         public long Id { get; set; }
         public bool IsActive { get; set; }
         public DateTimeOffset LastUpdateDate { get; set; }
-        public required string Name { get; set; }
-        public required string Pattern { get; set; }
-        public required string Project { get; set; }
+        public string Name { get; set; }
+        public string Pattern { get; set; }
+        public string Project { get; set; }
 
         public static ReadUserModel Convert(User user)
         {
@@ -57,9 +57,9 @@ namespace Vaelastrasz.Server.Models
     {
         public long AccountId { get; set; }
         public bool IsActive { get; set; }
-        public required string Name { get; set; }
-        public required string Password { get; set; }
-        public required string Pattern { get; set; }
-        public required string Project { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public string Pattern { get; set; }
+        public string Project { get; set; }
     }
 }

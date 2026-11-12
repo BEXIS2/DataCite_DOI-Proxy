@@ -2,6 +2,7 @@
 using MethodTimer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Vaelastrasz.Library.Filters;
 using Vaelastrasz.Server.Models;
 using Vaelastrasz.Server.Services;
 
@@ -63,13 +64,14 @@ namespace Vaelastrasz.Server.Controllers
         [HttpGet("accounts")]
         [ProducesResponseType(typeof(List<ReadAccountModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> GetAsync()
+        public async Task<IActionResult> GetAsync([FromQuery] QueryFilter filter)
         {
             if (!User.IsInRole("admin"))
                 return Forbid();
 
             var accountService = new AccountService(_connectionString);
-            var result = await accountService.GetAsync();
+
+            var result = await accountService.QueryAsync(filter);
 
             return Ok(new List<ReadAccountModel>(result.Select(a => ReadAccountModel.Convert(a))));
         }

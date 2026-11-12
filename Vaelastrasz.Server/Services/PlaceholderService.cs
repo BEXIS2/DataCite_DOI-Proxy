@@ -1,6 +1,8 @@
 ﻿using LiteDB;
 using Vaelastrasz.Library.Entities;
 using Vaelastrasz.Library.Exceptions;
+using Vaelastrasz.Library.Extensions;
+using Vaelastrasz.Library.Filters;
 
 namespace Vaelastrasz.Server.Services
 {
@@ -58,6 +60,26 @@ namespace Vaelastrasz.Server.Services
             });
         }
 
+        public async Task<List<Placeholder>> QueryAsync(QueryFilter filter)
+        {
+            return await Task.Run(() =>
+            {
+                using var db = new LiteDatabase(_connectionString);
+                var col = db.GetCollection<Placeholder>("placeholders");
+
+                var placeholders = col.Query().ToList().AsQueryable();
+
+                var pageNumber = Math.Max(1, filter.PageNumber);
+                var pageSize = Math.Clamp(filter.PageSize, 1, 50);
+
+                placeholders = placeholders.ApplySearch(filter.Search);
+                placeholders = placeholders.ApplySort(filter.SortBy);
+                placeholders = placeholders.ApplyPagination(pageNumber, pageSize);
+
+                return placeholders.ToList();
+            });
+        }
+
         public async Task<Placeholder> GetByIdAsync(long id)
         {
             return await Task.Run(() =>
@@ -81,6 +103,26 @@ namespace Vaelastrasz.Server.Services
                 var placeholders = col.Query().Where(p => p.User.Id == userId).ToList();
 
                 return placeholders;
+            });
+        }
+
+        public async Task<List<Placeholder>> GetByUserIdAsync(long userId, QueryFilter filter)
+        {
+            return await Task.Run(() =>
+            {
+                using var db = new LiteDatabase(_connectionString);
+                var col = db.GetCollection<Placeholder>("placeholders");
+
+                var pageNumber = Math.Max(1, filter.PageNumber);
+                var pageSize = Math.Clamp(filter.PageSize, 1, 50);
+
+                var placeholders = col.Query().Where(p => p.User.Id == userId).ToList().AsQueryable();
+
+                placeholders = placeholders.ApplySearch(filter.Search);
+                placeholders = placeholders.ApplySort(filter.SortBy);
+                placeholders = placeholders.ApplyPagination(pageNumber, pageSize);
+
+                return placeholders.ToList();
             });
         }
 

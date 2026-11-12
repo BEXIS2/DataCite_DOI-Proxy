@@ -2,12 +2,13 @@
 
   <PropertyGroup>
 	<TargetFramework>netstandard2.0</TargetFramework>
+	<LangVersion>10.0</LangVersion>
     <RepositoryUrl>https://github.com/BEXIS2/DataCite_DOI-Proxy</RepositoryUrl>
     <PackageProjectUrl>https://github.com/BEXIS2/DataCite_DOI-Proxy</PackageProjectUrl>
     <Authors>Sven Thiel</Authors>
     <Title>Vaelastrasz.Library</Title>
     <IncludeSymbols>True</IncludeSymbols>
-    <Version>6.2.8</Version>
+    <Version>6.3.8</Version>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -26,6 +27,8 @@
     <PackageReference Include="NameParserSharp" Version="1.5.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.7.4" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
   </ItemGroup>
 
