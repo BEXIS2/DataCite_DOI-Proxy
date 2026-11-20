@@ -11,9 +11,11 @@ namespace Vaelastrasz.Server.Controllers
     public class PrefixesController : ControllerBase
     {
         private ConnectionString _connectionString;
+        private readonly ILogger<PrefixesController> _logger;
 
-        public PrefixesController(IConfiguration configuration, ConnectionString connectionString)
+        public PrefixesController(ILogger<PrefixesController> logger, ConnectionString connectionString)
         {
+            _logger = logger;
             _connectionString = connectionString;
         }
 

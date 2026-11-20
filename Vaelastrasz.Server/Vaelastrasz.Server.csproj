@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-	<Version>7.0.1</Version>
+	<Version>7.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,10 +26,10 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="11.0.0" />
     <PackageReference Include="Microsoft.OpenApi" Version="3.11.1" />
     <PackageReference Include="NameParserSharp" Version="1.5.0" />
-    <PackageReference Include="Scalar.AspNetCore" Version="3.0.1" />
+    <PackageReference Include="Scalar.AspNetCore" Version="3.0.2" />
     <PackageReference Include="Serilog" Version="4.4.0" />
-    <PackageReference Include="Serilog.Extensions.Hosting" Version="10.0.0" />
-    <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.1" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="11.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="11.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />

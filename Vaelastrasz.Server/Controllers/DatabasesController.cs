@@ -12,10 +12,10 @@ namespace Vaelastrasz.Server.Controllers
     [RequestFormLimits(MultipartBodyLengthLimit = 32000000)]
     public class DatabasesController : ControllerBase
     {
-        private readonly ILogger<AccountsController> _logger;
+        private readonly ILogger<DatabasesController> _logger;
         private ConnectionString _connectionString;
 
-        public DatabasesController(ILogger<AccountsController> logger, ConnectionString connectionString)
+        public DatabasesController(ILogger<DatabasesController> logger, ConnectionString connectionString)
         {
             _logger = logger;
             _connectionString = connectionString;

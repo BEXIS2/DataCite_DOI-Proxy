@@ -15,8 +15,11 @@ namespace Vaelastrasz.Server.Controllers
     {
         private ConnectionString _connectionString;
 
-        public SuffixesController(IConfiguration configuration, ConnectionString connectionString)
+        private readonly ILogger<SuffixesController> _logger;
+
+        public SuffixesController(ILogger<SuffixesController> logger, ConnectionString connectionString)
         {
+            _logger = logger;
             _connectionString = connectionString;
         }
 

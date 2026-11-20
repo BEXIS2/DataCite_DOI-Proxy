@@ -14,11 +14,11 @@ namespace Vaelastrasz.Server.Controllers
     [ApiController, Authorize(Roles = "user"), Route("api"), Time]
     public class DOIsController : ControllerBase
     {
-        private readonly ILogger<DataCiteController> _logger;
+        private readonly ILogger<DOIsController> _logger;
         private List<Admin> _admins;
         private ConnectionString _connectionString;
 
-        public DOIsController(ILogger<DataCiteController> logger, IConfiguration configuration, ConnectionString connectionString)
+        public DOIsController(ILogger<DOIsController> logger, IConfiguration configuration, ConnectionString connectionString)
         {
             _connectionString = connectionString;
             _admins = configuration.GetSection("Admins").Get<List<Admin>>() ?? [];
