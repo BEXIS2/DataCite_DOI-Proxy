@@ -24,13 +24,14 @@ namespace Vaelastrasz.Server.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetByIdAsync(string id)
         {
-            if (!User.IsInRole("admin"))
-                return Forbid();
+            //if (!User.IsInRole("admin"))
+            //    return Forbid();
 
-            var accountService = new AccountService(_connectionString);
-            var result = await accountService.GetByIdAsync(id);
+            //var accountService = new AccountService(_connectionString);
+            //var result = await accountService.GetByIdAsync(id);
 
-            return Ok(ReadAccountModel.Convert(result));
+            //return Ok(ReadAccountModel.Convert(result));
+            throw new NotImplementedException("This endpoint is not implemented yet.");
         }
     }
 }

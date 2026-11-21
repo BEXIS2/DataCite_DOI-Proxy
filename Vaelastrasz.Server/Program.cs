@@ -140,6 +140,4 @@ app.MapControllers();
 
 app.UseForwardedHeaders();
 
-app.MapMethods("/", ["HEAD"], () => Results.Ok(new { status = "OK", timestamp = DateTime.UtcNow })).AllowAnonymous();
-
 app.Run();
