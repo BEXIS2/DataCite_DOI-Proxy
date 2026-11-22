@@ -11,7 +11,7 @@ namespace Vaelastrasz.Server.Controllers
         private readonly ILogger<UsersController> _logger;
         private ConnectionString _connectionString;
 
-        public VersionsController(ILogger<UsersController> logger, IConfiguration configuration, ConnectionString connectionString)
+        public VersionsController(ILogger<UsersController> logger, ConnectionString connectionString)
         {
             _connectionString = connectionString;
             _logger = logger;

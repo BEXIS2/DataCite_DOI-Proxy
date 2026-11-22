@@ -10,6 +10,16 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  workflow_dispatch:
+    inputs:
+      build-configuration:
+        description: 'Build configuration (e.g. Debug, Release)'
+        default: 'Release'
+        required: true
+      publish:
+        description: 'Publish the app?'
+        default: 'Release'
+        required: false
 
 jobs:
   build:

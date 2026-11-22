@@ -7,9 +7,9 @@ namespace Vaelastrasz.Server.Controllers
     [ApiController, Route("api"), Time]
     public class NamesController : ControllerBase
     {
-        private readonly ILogger<UsersController> _logger;
+        private readonly ILogger<NamesController> _logger;
 
-        public NamesController(ILogger<UsersController> logger)
+        public NamesController(ILogger<NamesController> logger)
         {
             _logger = logger;
         }

@@ -1,5 +1,7 @@
 ![NuGet Version](https://img.shields.io/nuget/v/Vaelastrasz.Library)
 ![NuGet Downloads](https://img.shields.io/nuget/dt/Vaelastrasz.Library)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/sventhiel/vaelastrasz/dotnet.yml)
+
 
 
 # Vaelastrasz.Library
@@ -14,7 +16,7 @@ Within this section, I try to collect and answer that questions, that came up qu
 
 ### Warum existiert neben der Bibliothek auch ein Server-Projekt?
 
-### Wozu wird Vaelastrasz.Server benötigt?
+### Wozu wird Vaelastrasz.Server benÃ¶tigt?
 
 ### Why do I use a separate model instead of XML(XSD) or JSON(JSON-schema)?
 
