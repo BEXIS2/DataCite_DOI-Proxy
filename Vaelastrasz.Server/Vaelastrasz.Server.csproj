@@ -26,7 +26,7 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="11.0.0" />
     <PackageReference Include="Microsoft.OpenApi" Version="3.11.1" />
     <PackageReference Include="NameParserSharp" Version="1.5.0" />
-    <PackageReference Include="Scalar.AspNetCore" Version="3.0.2" />
+    <PackageReference Include="Scalar.AspNetCore" Version="3.1.1" />
     <PackageReference Include="Serilog" Version="4.4.0" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="11.0.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="11.0.0" />
